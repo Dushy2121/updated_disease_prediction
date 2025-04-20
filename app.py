@@ -10,6 +10,7 @@ import os
 import sys
 import sklearn.preprocessing
 import sklearn.ensemble._forest
+from utils import PredictionModel
 sys.modules['sklearn.ensemble.forest'] = sklearn.ensemble._forest
 sys.modules['sklearn.preprocessing.data'] = sklearn.preprocessing
 sys.modules['sklearn.tree.tree'] = sklearn.tree._tree
@@ -80,30 +81,26 @@ def landing_function():
                            stock_files=stock_files, disease=disease, diseases=AVAILABLE_DISEASES,
                            len2=0, all_prediction_data=[], prediction_date="", dates=[], all_data=[], len=0)
 
+model= None
 @app.route('/process', methods=['POST'])
 def process():
+    global model
     disease = request.form.get('disease')
     if disease is None:
         return "Error: 'disease' field is missing from the form", 400
-    stock_file_name = request.form['stockfile']
-    ml_algorithms = [algo.lower() for algo in request.form.getlist('mlalgos')]
+    ml_algo= request.form.get('ml_algo')
+    if ml_algo is None:
+        return "Error: 'ml_algo' field is missing from the form", 400
+    model=PredictionModel(disease, ml_algo)
+    model.train()
+    model.plot_results()
 
-    ml_algorithms = request.form.getlist('mlalgos')
-    data_path = os.path.join(DATA_DIR, disease)
-    all_files = utils.read_all_stock_files(data_path)
-    df = all_files[stock_file_name]
-
-    prediction_data, _, prediction_date, dates, all_data, _, all_test_evaluations = perform_training(
-        disease, stock_file_name, df, ml_algorithms
-    )
-    stock_files = list(all_files.keys())
-    
-
-    return render_template('index.html', all_test_evaluations=all_test_evaluations, show_results="true",
-                           stocklen=len(stock_files), stock_files=stock_files, disease=disease,
-                           diseases=AVAILABLE_DISEASES, len2=len(prediction_data),
-                           all_prediction_data=prediction_data,
-                           prediction_date=prediction_date, dates=dates, all_data=all_data, len=len(all_data))
+@app.route('/case_prediction', methods=['POST'])
+def case_prediction():
+    global model
+    recent_cases= request.form.getlist('recent_cases') 
+    next_case = model.predict_next(recent_cases)
+    print("Predicted Next Case:", next_case)
 
 
 @app.route('/upload')

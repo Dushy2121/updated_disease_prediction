@@ -56,7 +56,7 @@ class PredictionModel:
         self.dates = df[self.date_col].values
         self.y = df[self.target_col].values
 
-    def _prepare_data(self):
+    def _prepare_data(self): # TODO ask gpt what this function does
         split_idx = int(len(self.y) * (1 - self.test_size))
         y_train, y_test = self.y[:split_idx], self.y[split_idx:]
         dates_train, dates_test = self.dates[:split_idx], self.dates[split_idx:]
@@ -193,7 +193,7 @@ class PredictionModel:
         ]
 
 
-model = PredictionModel(disease='covid', model_name='random_forests')
+model = PredictionModel(disease='covid', model_name='knn')
 model.train()
 model.plot_results()
 
