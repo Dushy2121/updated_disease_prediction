@@ -14,13 +14,16 @@ This project implements a time series prediction system to forecast daily new ca
 ├── data/
 │   └── covid/
 │       └── covid.csv
+│   └── dengue/
+│       └── dengue.csv
 │   └── malaria/
 │       └── malaria.csv
 ├── image/
-│   └── predicted.png
-│   └── mean.png
+│   └── ...
+├── template/
+│   └── ...
 ├── app.py
-├── prediction_model.py
+├── utils.py
 ├── requirements.txt
 └── README.md
 ```
