@@ -2,15 +2,13 @@ Here’s a clean and structured **README.md** file for your time series predicti
 
 ---
 
-```markdown
 # 🧠 Disease Time Series Prediction Model
-
+```markdown
 This project implements a time series prediction system to forecast daily new cases for various diseases (like COVID, Malaria, etc.). It supports multiple ML and DL models including SVR, Random Forest, Linear Regression, and LSTM. The application is wrapped in a Flask API with endpoints for training/visualization and prediction.
 
----
+```
 
 ## 📁 Project Structure
-
 ```
 .
 ├── data/

@@ -1,0 +1,154 @@
+<!-- Author: Template Stock -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PREDICTING INFECTIOUS DISEASE OUTBREAKS </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="keywords" content="PREDICTING INFECTIOUS DISEASE OUTBREAKS " />
+
+    <!-- Bootstrap & Style -->
+    <link href="../static/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../static/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/freelancer.min.css" rel="stylesheet">
+
+    <!-- Font Awesome & Google Fonts -->
+    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+
+    <!-- jQuery & JS Plugins -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="../static/js/move-top.js"></script>
+    <script src="../static/js/easing.js"></script>
+    <script src="js/jquery.wmuSlider.js"></script>
+
+    <style>
+        #loading {
+            background: url('../static/ajax-loader.gif') no-repeat center center;
+            position: absolute;
+            top: 0;
+            left: 59px;
+            height: 100%;
+            width: 86%;
+            z-index: 9999999;
+        }
+
+        .form-group {
+            padding: 0px 250px 10px 40px;
+            height: 200px;
+        }
+
+        .form-group input {
+            margin-left: 200px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+            });
+
+            $("span.menu").click(function () {
+                $(".top-menu ul").slideToggle("slow");
+            });
+
+            $('.example1').wmuSlider();
+        });
+
+        function hideLoader() {
+            $('#loading').show(0).delay(10000).hide(0, function () {
+                alert("Training finished!");
+                window.location = "{{ url_for('landing_function') }}";
+            });
+        }
+    </script>
+</head>
+
+<body id="page-top">
+    <!-- Header Section -->
+    <div class="header" id="head">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.png" alt="" /></a>
+                </div>
+                <div class="top-menu">
+                    <span class="menu"> </span>
+                    <ul>
+                        <nav class="cl-effect-5">
+                            <li><a class="active" href="{{ url_for('first') }}"><span data-hover="Home">home</span></a></li>
+                            <li><a href="{{ url_for('index2') }}"><span data-hover="login">login</span></a></li>
+                            <li><a href="{{ url_for('upload') }}"><span data-hover="upload">upload</span></a></li>
+                        </nav>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <!-- Banner -->
+            <div class="index-banner">
+                <div class="wmuSlider example1">
+                    <div class="wmuSliderWrapper">
+                        <article style="position: relative; width: 100%; opacity: 1;">
+                            <div class="banner-wrap">
+                                <div class="banner_center">
+                                    <h1>PREDICTING INFECTIOUS DISEASE OUTBREAKS </h1>
+                                    
+                                    <h2> Supervised Machine Learning </h2>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Section -->
+    <section class="page-section" id="preview">
+        <div class="container">
+            <h2 class="text-center text-uppercase text-secondary mb-0">Preview</h2>
+
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <div class="row" style="margin-left:-150px">
+                <div class="col-lg-8 mx-auto">
+                    {{ df_view| safe }}
+                </div>
+            </div>
+
+            <br><br>
+
+            <div class="form-group">
+                <input type="button" onclick="hideLoader()" class="btn btn-primary" value="Click to Train | Test" />
+                <div id="loading" style="display:none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <div class="footer-section">
+        <div class="container">
+            <div class="footer-bottom">
+                <!-- Footer content can go here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Script -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+    </script>
+</body>
+</html>

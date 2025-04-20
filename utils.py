@@ -193,11 +193,11 @@ class PredictionModel:
         ]
 
 
-model = PredictionModel(disease='covid', model_name='knn')
-model.train()
-model.plot_results()
+# model = PredictionModel(disease='covid', model_name='knn')
+# model.train()
+# model.plot_results()
 
-# Predict new case
-recent_cases= [100, 120, 130, 140, 150, 160, 170]
-next_case = model.predict_next(recent_cases)
-print("Predicted Next Case:", next_case)
+# # Predict new case
+# recent_cases= [100, 120, 130, 140, 150, 160, 170]
+# next_case = model.predict_next(recent_cases)
+# print("Predicted Next Case:", next_case)
