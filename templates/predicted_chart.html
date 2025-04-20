@@ -176,23 +176,23 @@
             <div class="chart-container">
                 <div class="chart-box">
                     <div class="chart-title">Predicted Values</div>
-                    <img src="D:/Dushyant/updated_disease_prediction/image/predicted.png" alt="Predicted Values Chart">
+                    <img src="{{ url_for('get_image', image_name='predicted.png') }}" alt="Predicted Values Chart">
                 </div>
                 <div class="chart-box">
                     <div class="chart-title">Mean Values</div>
-                    <img src="D:/Dushyant/updated_disease_prediction/image/mean.png" alt="Mean Values Chart">
+                    <img src="{{ url_for('get_image', image_name='mean.png') }}" alt="Mean Values Chart">
                 </div>
                 <div class="chart-box">
                     <div class="chart-title">Median Values</div>
-                    <img src="D:/Dushyant/updated_disease_prediction/image/median.png" alt="Median Values Chart">
+                    <img src="{{ url_for('get_image', image_name='median.png') }}" alt="Median Values Chart">
                 </div>
                 <div class="chart-box">
                     <div class="chart-title">Minimum Values</div>
-                    <img src="D:/Dushyant/updated_disease_prediction/image/min.png" alt="Minimum Values Chart">
+                    <img src="{{ url_for('get_image', image_name='min.png') }}" alt="Minimum Values Chart">
                 </div>
                 <div class="chart-box">
                     <div class="chart-title">Maximum Values</div>
-                    <img src="D:/Dushyant/updated_disease_prediction/image/max.png" alt="Maximum Values Chart">
+                    <img src="{{ url_for('get_image', image_name='max.png') }}" alt="Maximum Values Chart">
                 </div>
             </div>
         </div>

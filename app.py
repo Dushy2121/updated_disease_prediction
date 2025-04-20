@@ -126,11 +126,29 @@ def case_prediction():
     print("Predicted Next Case:", next_case)
     return render_template(
             'predicted_chart.html',
-            predicted_cases=next_case,
+            predicted_cases=int(next_case),
             chosen_disease=disease,
             chosen_algo=algorithm
         )
 
+@app.route('/get_image/<image_name>')
+def get_image(image_name):
+    """Serve images from the non-static 'image' folder"""
+    try:
+        # Add safety check to prevent directory traversal
+        if '..' in image_name or image_name.startswith('/'):
+            return "Invalid image name", 400
+            
+        # Create the full path to the image
+        image_path = os.path.join(os.getcwd(), 'image', image_name)
+        
+        # Check if file exists
+        if not os.path.exists(image_path):
+            return f"Image {image_name} not found", 404
+            
+        return send_file(image_path, mimetype='image/png')
+    except Exception as e:
+        return str(e), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
-    print(request.form)
