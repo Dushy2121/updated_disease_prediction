@@ -80,37 +80,10 @@ def index3():
 def index():
     return render_template("index.html")
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        int_feature = [x for x in request.form.values()]
-        if not int_feature:
-            raise ValueError("No input features provided")
-        final_features = [np.array(int_feature)]
-        Total_infections = pol.transform(final_features)
-        prediction = regresso.predict(Total_infections)
-        pred = format(int(prediction[0]))
-    except Exception as e:
-        pred = f"Error: {str(e)}"
-    return render_template('index3.html', prediction_text=pred)
 
-@app.route('/process', methods=['POST'])
-def process():
-    global model
-    disease = request.form.get('disease')
-    if disease is None:
-        return "Error: 'disease' field is missing from the form", 400
-    ml_algo= request.form.get('ml_algo')
-    if ml_algo is None:
-        return "Error: 'ml_algo' field is missing from the form", 400
-    model=PredictionModel(disease, ml_algo)
-    model.train()
-    model.plot_results()
-    return {"message:":"success"}
 
 @app.route('/case_prediction', methods=['POST'])
 def case_prediction():
-
     disease = request.form.get('disease')
     if disease is None:
         return "Error: 'disease' field is missing from the form", 400
@@ -119,7 +92,7 @@ def case_prediction():
         return "Error: 'ml_algo' field is missing from the form", 400
     model=PredictionModel(disease, algorithm)
     model.train()
-    model.plot_results()  # stores 5 chart image in png format in "image" folder. The charts are named as min.png, max.png, mean.png, predicted.png, median.png
+    model.plot_results()  
     raw_cases = request.form.getlist('cases[]')
     recent_cases = [int(x) for x in raw_cases]
     next_case = model.predict_next(recent_cases)
