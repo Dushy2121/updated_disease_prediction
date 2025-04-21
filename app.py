@@ -54,8 +54,10 @@ def preview():
         df = pd.read_csv(dataset, encoding='unicode_escape')
 
         df.set_index('Id', inplace=True)
-        return render_template("preview.html", df_view=df.to_html(classes='table table-striped', index=True))
-
+        # Only display the first 20 rows
+        preview_df = df.head(20)
+        return render_template("preview.html", df_view=preview_df.to_html(classes='table table-striped', index=True))
+    
 @app.route('/chart')
 def chart():
     return render_template('chart.html')
