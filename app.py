@@ -13,10 +13,11 @@ from utils import PredictionModel
 sys.modules['sklearn.ensemble.forest'] = sklearn.ensemble._forest
 sys.modules['sklearn.preprocessing.data'] = sklearn.preprocessing
 sys.modules['sklearn.tree.tree'] = sklearn.tree._tree
-
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 model= None
 
 # === Configuration for multiple diseases ===
